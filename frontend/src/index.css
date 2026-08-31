@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply font-body text-paper bg-slate-950 antialiased;
+  }
+  ::selection {
+    @apply bg-ember/40;
+  }
+  *:focus-visible {
+    @apply outline-none ring-2 ring-ember ring-offset-2 ring-offset-slate-900;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* The signature element: a kitchen docket card. Status is read from the
+     left-edge stripe color, not from a badge — the fastest thing to scan
+     from across a kitchen or a busy floor. */
+  .docket {
+    @apply relative bg-slate-800 rounded-md border-l-[6px] shadow-sm overflow-hidden;
+  }
+  .docket-pending { @apply border-ember; }
+  .docket-ready { @apply border-sage; }
+  .docket-urgent { @apply border-brick; }
+  .docket-neutral { @apply border-slate-600; }
+
+  .tap-target {
+    @apply min-h-[48px] min-w-[48px];
+  }
+}
+
+/*
+ * 80mm thermal receipt printing. #print-receipt-root wraps the Receipt80mm
+ * component (see pages/cashier/CashierPage.tsx). Outside of print, it's a
+ * normal on-screen preview; on print, everything else is hidden and the
+ * page is sized to match the physical paper width so it comes out of the
+ * thermal printer correctly formatted instead of scaled/cropped to A4.
+ */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #print-receipt-root,
+  #print-receipt-root * {
+    visibility: visible;
+  }
+  #print-receipt-root {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  @page {
+    size: 80mm auto;
+    margin: 0;
+  }
+}
