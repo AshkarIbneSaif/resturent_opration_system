@@ -1,5 +1,5 @@
 {
-  "buildCommand": "cd frontend && rm -rf node_modules && npm install && npm run build",
-  "outputDirectory": "frontend/dist",
+  "buildCommand": "rm -rf node_modules && npm install && npm run build",
+  "outputDirectory": "dist",
   "framework": "vite"
 }
