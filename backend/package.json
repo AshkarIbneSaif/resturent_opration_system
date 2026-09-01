@@ -1,14 +1,15 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Restaurant Operations System backend",
+  "main": "dist/server.js",
   "directories": {
     "test": "tests"
   },
   "scripts": {
     "dev": "tsx src/server.ts",
     "build": "tsc -p .",
+    "start": "node dist/server.js",
     "migrate": "tsx src/infra/db/migrate.ts",
     "bootstrap": "tsx src/infra/bootstrap.ts",
     "seed:demo": "tsx src/infra/seedDemo.ts",
@@ -17,6 +18,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
     "@types/cors": "^2.8.19",
